@@ -1,0 +1,57 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    padding: 2.5rem;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.form-row {
+    padding: 1rem;
+}
+
+.form-row > input {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    outline: none
+}
+
+.form-row > input[type='submit'] {
+    background: blue;
+    color: white;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.form-row > input[type='submit']:hover {
+    background: rgb(0, 0, 158);
+}
+
+.error-form-message {
+    font-size: 0.75rem;
+    color: red;
+    width: 100%;
+    display: block;
+    padding: 0.5rem 0rem;
+}
+
+.error-flash-message {
+    color: white;
+    background: red;
+    position: absolute;
+    right: 0rem;
+    bottom: 1rem;
+    padding: 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.75rem 0rem 0rem 0.75rem;
+    cursor: pointer;
+}
