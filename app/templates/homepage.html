@@ -4,16 +4,24 @@
 {% block content %}
     <div class="container">
         <div class="block">
-            
+            <div class="block-name">Add a New Expense</div>
+            <div class="block-content"><button id="addExpenseBtn">+</button></div>
         </div>
         <div class="block">
+            <div class="block-name">Block-Name</div>
+        </div>
+        <div class="block">
+            <div class="block-name">Block-Name</div>
+        </div>
+        <div class="block">
+            <div class="block-name">Block-Name</div>
+        </div>
 
-        </div>
-        <div class="block">
-            
-        </div>
-        <div class="block">
-            
+        <div class="add-expense-form">
+
         </div>
     </div>
 {% endblock  %}
+{% block script %}
+    <script src="{{url_for('static', filename='homepage.js')}}"></script>
+{% endblock script %}

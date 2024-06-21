@@ -1,17 +1,20 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, abort
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, login_user, login_required
 import werkzeug
-import werkzeug.exceptions
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
 
+    login_manager = LoginManager()
+
     app.config['SECRET_KEY'] ='randomsupersafekey'
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 
     db.init_app(app)
+    login_manager.init_app(app)
 
     from .forms import LoginForm
 
@@ -27,6 +30,7 @@ def create_app():
 
             if admin:
                 if username == admin.username and password == admin.password:
+                    login_user(admin, remember=False)
                     return redirect(url_for('homepage'))
                 else:
                     flash('Invalid credentials')
@@ -35,7 +39,8 @@ def create_app():
             
         return render_template('index.html', form=login_form)
     
-    @app.route('/homepage')
+    @app.route('/dashboard')
+    @login_required
     def homepage():
         return render_template('homepage.html')
 
@@ -48,6 +53,10 @@ def create_app():
         return render_template("404.html"), 404
     
     from .models import Admin
+
+    @login_manager.user_loader
+    def load_user(id):
+        return Admin.query.get(int(id))
 
     with app.app_context():
         admin = Admin.query.filter_by(username='admin').first()
