@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, DateField, FloatField, SelectField
 from wtforms.validators import DataRequired, ValidationError
 
 # CUSTOM VALIDATORS
@@ -18,3 +18,10 @@ class LoginForm(FlaskForm):
     username = StringField('username', validators=[custom_username_validator])
     password = PasswordField('password', validators=[custom_password_validator])
     submit = SubmitField('Login')
+
+class AddExpenseForm(FlaskForm):
+    amount = FloatField('Amount')
+    date = DateField('Date')
+    category = SelectField('Category', choices=[('hobbies', 'Hobbies')])
+    payment_method = SelectField('Payment Method', choices=[('card', 'Card')])
+    submit = SubmitField('Add New')

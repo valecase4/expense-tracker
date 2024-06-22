@@ -56,16 +56,67 @@ body {
 
 .add-expense-form {
     width: 40%;
-    height: 50%;
+    height: fit-content;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
     left: 100%;
-    background: lightgray;
+    background: rgb(236, 236, 236);
     transition: left 0.5s ease;
 }
 
 .add-expense-form.show {
     left: 50%;
     transform: translate(-50%, -50%)
+}
+
+.add-expense-form .form-row {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.25rem;
+    justify-content: center;
+}
+
+.add-expense-form .form-row .half-form-row {
+    width: 50%;
+}
+
+.half-form-row input,
+.half-form-row select
+{
+    font-size: 1.25rem;
+    width: 75%;
+}
+
+.form-row input[type='submit'] {
+    width: 25%;
+    cursor: pointer;
+    margin-top: 2rem;
+    border: none;
+    background: blue;
+    color: white;
+    padding: 1rem;
+    font-size: 1.25rem;
+}
+
+.form-row input[type='submit']:hover {
+    background: rgb(0, 0, 158);
+}
+
+#closeAddExpenseFormBtn {
+    background: red;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    right: 1rem;
+}
+
+#closeAddExpenseFormBtn:hover {
+    background: rgb(179, 0, 0);
 }

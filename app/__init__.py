@@ -17,6 +17,7 @@ def create_app():
     login_manager.init_app(app)
 
     from .forms import LoginForm
+    from .forms import AddExpenseForm
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -39,10 +40,11 @@ def create_app():
             
         return render_template('index.html', form=login_form)
     
-    @app.route('/dashboard')
+    @app.route('/dashboard', methods=['GET', 'POST'])
     @login_required
     def homepage():
-        return render_template('homepage.html')
+        add_expense_form = AddExpenseForm()
+        return render_template('homepage.html', form=add_expense_form)
 
     @app.errorhandler(werkzeug.exceptions.Unauthorized)
     def handle_unauthorized(e):

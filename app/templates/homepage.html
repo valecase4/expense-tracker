@@ -18,7 +18,47 @@
         </div>
 
         <div class="add-expense-form">
-
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-row close-btn">
+                    <button id="closeAddExpenseFormBtn">X</button>
+                </div>
+                <div class="form-row">
+                    <div class="half-form-row">
+                        {{ form.amount.label }}
+                    </div>
+                    <div class="half-form-row">
+                        {{ form.amount() }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="half-form-row">
+                        {{ form.date.label }}
+                    </div>
+                    <div class="half-form-row">
+                        {{ form.date() }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="half-form-row">
+                        {{ form.category.label }}
+                    </div>
+                    <div class="half-form-row">
+                        {{ form.category() }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="half-form-row">
+                        {{ form.payment_method.label }}
+                    </div>
+                    <div class="half-form-row">
+                        {{ form.payment_method() }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    {{ form.submit() }}
+                </div>
+            </form>
         </div>
     </div>
 {% endblock  %}
