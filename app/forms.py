@@ -20,8 +20,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class AddExpenseForm(FlaskForm):
-    amount = FloatField('Amount')
+    amount = FloatField('Amount', validators=[DataRequired()])
     date = DateField('Date')
-    category = SelectField('Category', choices=[('hobbies', 'Hobbies')])
-    payment_method = SelectField('Payment Method', choices=[('card', 'Card')])
+    category = SelectField('Category', choices=[])
+    payment_method = SelectField('Payment Method', choices=[])
     submit = SubmitField('Add New')

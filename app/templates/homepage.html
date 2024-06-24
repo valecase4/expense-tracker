@@ -60,6 +60,10 @@
                 </div>
             </form>
         </div>
+
+        <a href="{{url_for('settings', id=current_user.id)}}">
+            <i class="fa-solid fa-gear open-settings"></i>
+        </a>
     </div>
 {% endblock  %}
 {% block script %}

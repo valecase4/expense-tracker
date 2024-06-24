@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, abort
+from flask import Flask, render_template, request, flash, redirect, url_for, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, login_required
+from flask_login import LoginManager, login_user, login_required, current_user
 import werkzeug
 
 db = SQLAlchemy()
@@ -43,8 +43,16 @@ def create_app():
     @app.route('/dashboard', methods=['GET', 'POST'])
     @login_required
     def homepage():
-        add_expense_form = AddExpenseForm()
+        add_expense_form = AddExpenseForm() 
+        
+        if add_expense_form.validate_on_submit():
+            print("Ok")
+
         return render_template('homepage.html', form=add_expense_form)
+    
+    @app.route('/<int:id>/settings')
+    def settings(id):
+        return f"Settings {id}"
 
     @app.errorhandler(werkzeug.exceptions.Unauthorized)
     def handle_unauthorized(e):
@@ -55,6 +63,9 @@ def create_app():
         return render_template("404.html"), 404
     
     from .models import Admin
+    from .models import Expense
+    from .models import Category
+    from .models import PaymentMethod
 
     @login_manager.user_loader
     def load_user(id):
