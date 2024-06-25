@@ -1,1 +1,30 @@
 {% extends 'base.html' %}
+{% block title %}Settings{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{{url_for('static', filename='settings.css')}}">{% endblock style %}
+{% block content %}
+    <div class="container">
+        <form action="" method="post">
+            {{ add_category_form.hidden_tag() }}
+            <div class="form-block">
+                {{ add_category_form.name.label }}
+            </div>
+            <div class="form-block">
+                {{ add_category_form.name() }}
+            </div>
+            <div class="form-block">
+                {{ add_category_form.submit() }}
+            </div>
+        </form>
+        <form action="" method="post">
+            <div class="form-block">
+                {{ add_payment_method_form.name.label }}
+            </div>
+            <div class="form-block">
+                {{ add_payment_method_form.name() }}
+            </div>
+            <div class="form-block">
+                {{ add_payment_method_form.submit() }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

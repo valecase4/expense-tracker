@@ -1,0 +1,34 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    background: rgb(238, 238, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container form {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.25rem;
+}
+
+.form-block {
+    width: 33%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-block input {
+    font-size: 1.25rem;
+    outline: none;
+    padding: 0.3rem;
+}
+
+.form-block input[type='submit'] {
+    cursor: pointer;
+}

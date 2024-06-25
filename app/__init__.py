@@ -13,11 +13,18 @@ def create_app():
     app.config['SECRET_KEY'] ='randomsupersafekey'
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 
+    from .models import Admin
+    from .models import Expense
+    from .models import Category
+    from .models import PaymentMethod
+
     db.init_app(app)
     login_manager.init_app(app)
 
     from .forms import LoginForm
     from .forms import AddExpenseForm
+    from .forms import AddCategoryForm
+    from .forms import AddPaymentMethodForm
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -43,16 +50,22 @@ def create_app():
     @app.route('/dashboard', methods=['GET', 'POST'])
     @login_required
     def homepage():
-        add_expense_form = AddExpenseForm() 
+        all_categories = Category.query.all()
+        all_payment_methods = PaymentMethod.query.all()
+
+        add_expense_form = AddExpenseForm(category_choices=all_categories, payment_method_choices=all_payment_methods) 
         
         if add_expense_form.validate_on_submit():
             print("Ok")
 
         return render_template('homepage.html', form=add_expense_form)
     
-    @app.route('/<int:id>/settings')
+    @app.route('/<int:id>/settings', methods=['GET', 'POST'])
     def settings(id):
-        return f"Settings {id}"
+        add_category_form = AddCategoryForm()
+        add_payment_method_form = AddPaymentMethodForm()
+
+        return render_template('settings.html', add_category_form=add_category_form, add_payment_method_form=add_payment_method_form)
 
     @app.errorhandler(werkzeug.exceptions.Unauthorized)
     def handle_unauthorized(e):
@@ -61,11 +74,6 @@ def create_app():
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template("404.html"), 404
-    
-    from .models import Admin
-    from .models import Expense
-    from .models import Category
-    from .models import PaymentMethod
 
     @login_manager.user_loader
     def load_user(id):
